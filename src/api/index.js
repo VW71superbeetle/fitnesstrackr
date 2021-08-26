@@ -1,20 +1,18 @@
 import axios from "axios";
 
-const apiURL = "https://guarded-sands-24074.herokuapp.com/api";
+const apiURL = "http://localhost:3002/api";
+// const apiURL = "https://guarded-sands-24074.herokuapp.com/api";
 // const apiURL ="https://fitnesstrac-kr.herokuapp.com/api"
 
 const getHeaders = () => {
     return {
+        'Content-type': 'application/json',
         Authorization: `Bearer ${getCurrentToken()}`
     }
 }
 
 // Auth Functions
 export function storeCurrentUser(data) {
-    console.log("USERObj: >> ", data.user)
-    console.log("USERID: >> ", data.user.id)
-    console.log("USERName: >> ", data.user.username)
-    console.log("TOKENObj: >> ", data.token)
     localStorage.setItem('currentUser', JSON.stringify(data.user));
     localStorage.setItem('currentUsername', JSON.stringify(data.user.username));
     localStorage.setItem('currentUserID', JSON.stringify(data.user.id));
@@ -23,23 +21,27 @@ export function storeCurrentUser(data) {
 
 export function clearCurrentUser() {
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('currentUsername');
+    localStorage.removeItem('currentUserID');
     localStorage.removeItem('currentToken');
 }
 
 export function GetCurrentUser() {
     const user = JSON.parse(localStorage.getItem('currentUser'));
-    console.log("GetCurrentUser() >>>", user)
     return user;
 }
 
 export function GetCurrentUserID() {
-    const userID = JSON.parse(localStorage.getItem('currentUserID'));
-    console.log("GetCurrentUserID() >>>", userID)
+    const userID = localStorage.getItem('currentUserID');
     return userID;
 }
-  
+
+export function GetCurrentUsername() {
+    const userName = JSON.parse(localStorage.getItem('currentUsername'));
+    return userName;
+}
 export function getCurrentToken() {
-    const user = JSON.parse(localStorage.getItem('currentToken'));
+    const token = JSON.parse(localStorage.getItem('currentToken'));
     return token;
 }
 
@@ -152,11 +154,16 @@ export async function GetAllRoutines() {
     }
 }
 
-export async function GetRoutinesByUser(user) {
-    const URL = `${apiURL}/users/${user}/routines`
+export async function GetRoutinesByUser(userName) {
+    const URL = `${apiURL}/users/${userName}/routines`
+    console.log("URL:", URL)
     try {
-        const {data} = await axios.get(`${URL}`,getHeaders())
-        console.log("RoutinesByUser",user,"DATA:>>>",data)
+        const {data} = await axios.get(`${URL}`,
+            {
+                headers: { Authorization: 'Bearer ' + getCurrentToken() }
+            }
+        )
+        await console.log("RoutinesByUser",userName,"DATA:>>>",data)
         return data
     } catch (error) {
         
@@ -176,16 +183,20 @@ export async function GetRoutinesByActivity(ActivityID) {
 
 export async function CreateNewRoutine(name, goal, isPublic) {
     const URL = `${apiURL}/routines`
+    console.log("Headers:", getHeaders())
     try {
         const {data} = await axios.post(`${URL}`, {
             name:name,
             goal:goal,
             isPublic:isPublic
-        })
+        }, {
+                headers: { Authorization: 'Bearer ' + getCurrentToken() }
+            }
+        )
         console.log(data)
         return data
     } catch (error) {
-        
+        console.error(error)
     }
 };
 
