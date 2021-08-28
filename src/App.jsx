@@ -92,7 +92,7 @@ export const App = () => {
         <>
             <Router>
                 <div id = "app">
-                    <Header user={user}/>         
+                    <Header setUser={setUser} user={user}/>         
                     <UsersPage setUser={setUser} user={user}/>
                     <Switch>
                         <Route path = "/routines">
@@ -105,7 +105,7 @@ export const App = () => {
                         </Route>
                         <Route path = "/activities">
                             <Activities 
-                                activities={activities}/>
+                                activities={activities} setActivities = {setActivities}/>
                         </Route>
                         <Route exact path="/">
                             <div id="dashboard">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { CreateNewRoutine, GetRoutinesByUser} from '../api';
+import { CreateNewRoutine, GetRoutinesByUser, GetCurrentUsername} from '../api';
 
-const CreateRoutine = ({ myroutines, setMyRoutines }) => {
+const CreateRoutine = ({ setMyRoutines }) => {
 	const [form, setForm] = useState({
 		isPublic: 'true',
 		name: '',
@@ -19,12 +19,9 @@ const CreateRoutine = ({ myroutines, setMyRoutines }) => {
     const handleCreateSubmit = async (e) => {
         e.preventDefault();
         try {   
-                console.log("Feeding into CreateRoutine", form.name, form.goal, form.isPublic)
                 const res = await CreateNewRoutine(form.name, form.goal, form.isPublic)
-                console.warn(res)
-                console.log("NewRoutine===>>>>", res)
-                // const routines = await GetRoutinesByUser(myroutines);
-                // setMyRoutines(routines)
+                const myRoutines = await GetRoutinesByUser(GetCurrentUsername());
+                setMyRoutines(myRoutines)
                 formReset();
         } catch (error) {
             console.error(error)
@@ -36,12 +33,13 @@ const CreateRoutine = ({ myroutines, setMyRoutines }) => {
         <div id="CreateRoutineForm">
             <h3>Please enter the name and goal of your new routine.</h3>
             <form onSubmit={handleCreateSubmit}>
-            <label>Make Public?</label>
+            {/* <label >Make Public?</label> */}
 				<input
-					style={{ marginTop: '3px', padding: '3px' }}
-					type="radio"
+					// style={{ marginTop: '3px', padding: '3px' }}
+					type="checkbox"
 					value='true'
 					name="isPublic"
+                    type = "hidden"
 					defaultChecked
 				/>{' '}
 				<br></br>

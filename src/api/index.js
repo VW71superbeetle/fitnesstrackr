@@ -66,7 +66,6 @@ export async function registerNewUser( username, password) {
             username,
             password
         })
-        console.log("RETURNED REGISTER DATA ===>>>>",data)
         storeCurrentUser(data)
         return data.user
     } catch (error) {
@@ -81,7 +80,6 @@ export async function loginExistingUser(username, password) {
             username,
             password
         })
-        console.log("RETURNED LOGIN DATA ===>>>>",data)
         storeCurrentUser(data)
         return data
     } catch (error) {
@@ -117,10 +115,14 @@ export async function CreateNewActivity(name, description) {
     const URL = `${apiURL}/activities`
     try {
         const {data} = await axios.post(`${URL}`, {
-            name:name,
-            description:description
-        })
-        console.log(data)
+                name:name,
+                description:description
+            },
+            {
+                headers: { Authorization: 'Bearer ' + getCurrentToken() }
+            }
+        )
+        console.log("NewActivity===>>>",data)
         return data
     } catch (error) {
         
@@ -193,33 +195,36 @@ export async function CreateNewRoutine(name, goal, isPublic) {
                 headers: { Authorization: 'Bearer ' + getCurrentToken() }
             }
         )
-        console.log(data)
         return data
     } catch (error) {
         console.error(error)
     }
 };
 
-export async function UpdateRoutine(routineID, name, goal, isPublic) {
-    const URL = `${apiURL}/activities/${routineID}`
+export async function UpdateRoutine(id, name, goal, isPublic) {
+    const URL = `${apiURL}/routines/${id}`
     try {
         const {data} = await axios.patch(`${URL}`, {
+            id ,
             name:name,
             goal:goal,
             isPublic:isPublic
+        }, {
+            headers: { Authorization: 'Bearer ' + getCurrentToken() }
         })
-        console.log(data)
         return data
     } catch (error) {
-        
+        console.log(error)
     }
 };
 
 export async function DeleteRoutine(routineID) {
     const URL = `${apiURL}/routines/${routineID}`
     try {
-        const {data} = await axios.delete(`${URL}`)
-        console.log(data)
+        const {data} = await axios.delete(`${URL}`,
+            {
+                headers: { Authorization: 'Bearer ' + getCurrentToken() }
+            })
         return data
     } catch (error) {
         
@@ -247,6 +252,8 @@ export async function UpdateRoutineActivity(routineActivityID, count, duration) 
         const {data} = await axios.patch(`${URL}`, {
             count:count,
             duration:duration
+        }, {
+            headers: { Authorization: 'Bearer ' + getCurrentToken() }
         })
         console.log(data)
         return data
@@ -259,9 +266,12 @@ export async function DeleteRoutineActivity(routineActivityID) {
     const URL = `${apiURL}/routine_activities/${routineActivityID}`
     try {
         const {data} = await axios.delete(`${URL}`, {
-            count:count,
-            duration:duration
-        })
+                count:count,
+                duration:duration
+            }, {
+                headers: { Authorization: 'Bearer ' + getCurrentToken() }
+            }
+        )
         console.log(data)
         return data
     } catch (error) {

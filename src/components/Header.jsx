@@ -7,7 +7,7 @@ export const Header = ({ setUser, user }) => {
                 <h1>
                     YourFitnessTracker
                 </h1>
-                <NavBar user={user}/>   
+                <NavBar user={user} setUser={setUser}/>   
             </header>
       );
 

@@ -2,13 +2,12 @@
 import React, {useState} from 'react';
 import {CreateActivity} from './';
 
-export const Activities = ({activities, user}) => {
+export const Activities = ({activities, setActivities}) => {
     
     return (
         <>
             <div className = "activities">
                 <h1>Activities</h1>
-                {/* {console.log("Activities>>>>>>>>>>>>>>",activities)} */}
                 {activities.map(({id, name, description}) => (
                     <div className="ActivityCard card" key={id}> 
                         <h3>Activity: {name}</h3>
@@ -16,7 +15,7 @@ export const Activities = ({activities, user}) => {
                     </div>
                 ))}           
             </div>
-            <CreateActivity activities={activities}/>
+            <CreateActivity activities={activities} setActivities = {setActivities}/>
         </>
         )
 

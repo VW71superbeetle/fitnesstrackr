@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { CreateNewActivity, GetAllActivities} from '../api';
 
-const CreateActivity = ({ activities }) => {
+const CreateActivity = ({ setActivities }) => {
 	const [form, setForm] = useState({
 		name: '',
 		description: '',
 	});
 
 	const formReset = () => {
-		setForm({ isPublic: 'true', name: '', goal: '' });
+		setForm({ name: '', description: '' });
 	};
 
 	const handleInput = (e) => {
@@ -18,9 +18,9 @@ const CreateActivity = ({ activities }) => {
     const handleCreateSubmit = async (e) => {
         e.preventDefault();
         try {   
-            const res = await CreateNewActivity(form.name, form.goal, form.isPublic)
-            // const routines = await GetRoutinesByUser(myroutines);
-            // setMyRoutines(routines)
+            const res = await CreateNewActivity(form.name, form.description)
+            const newActivity = await GetAllActivities();
+            setActivities(newActivity)
             formReset();
         } catch (error) {
             console.error(error)
