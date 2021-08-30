@@ -1,0 +1,58 @@
+* {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	height: 100vh;
+	background-image: linear-gradient(60deg, #4d5ea2 0%, #30c43c 100%);
+}
+
+#app {
+	overflow: hidden;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+	/* grid-template-columns: 320px 1fr; */
+    height: 100%;
+    width: 100%;
+	grid-gap: 8px;
+}
+
+.app {
+	display: grid;
+	grid-template-rows: auto auto 1fr;
+	grid-gap: 8px;
+	height: 100%;
+}
+
+header {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+}
+
+#NavBar {
+    display: grid;
+	grid-template-columns: 1fr;
+    justify-content: space-between;
+}
+
+.menu {
+    justify-self: right;
+    justify-content: space-between;
+    width: 90%
+}
+.RoutineCard, .ActivityCard, #CreateRoutineForm, #CreateActivityForm, .CreateRoutine{
+    max-width: 80%;
+    margin-left: 10%;
+}
+
+.loginForm {
+    max-width: 300px;
+}
+
+input { 
+    margin-top: '3px';
+    padding: '3px' 
+}
