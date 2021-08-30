@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const apiURL = "http://localhost:3002/api";
-// const apiURL = "https://guarded-sands-24074.herokuapp.com/api";
+// const apiURL = "http://localhost:3002/api";
+const apiURL = "https://guarded-sands-24074.herokuapp.com/api";
 // const apiURL ="https://fitnesstrac-kr.herokuapp.com/api"
 
 const getHeaders = () => {
