@@ -18,10 +18,6 @@ export const NavBar = ({ user, setUser }) => {
     }
       return (
             <div id="NavBar" >
-                {/* { user ? 
-                    <h3>Welcome, {GetCurrentUsername()}</h3>
-                    : ""
-                } */}
                 <div className="menu">
                     <NavLink to="/#" className="button">Home</NavLink>
                     <NavLink to="/routines" className="button">Check out the Routines </NavLink>
@@ -29,14 +25,14 @@ export const NavBar = ({ user, setUser }) => {
                     { user ? (
                             <>
                                 <NavLink to="/myroutines" className="button">Work on my Routines </NavLink> 
+                                <h3>Welcome, {GetCurrentUsername()}!</h3>
                                 <form id = "LogOutNav" onSubmit={handleLogOutSubmit}>
                                     <button className="button" type="Submit">Log Out</button>
                                 </form>
                             </>
                         ) 
                         : 
-                        // <UsersPageModal/>
-                        <button className="button">Login</button>
+                            <button className="button">Login</button>
                     }
                 </div>
             </div>

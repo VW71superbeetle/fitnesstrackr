@@ -16,7 +16,6 @@ const EditRoutine = ({ setMyRoutines , id, name, goal, isPublic }) => {
     const handleEditSubmit = async (e) => {
         e.preventDefault();
         try {   
-                console.log("RoutineID>>>", id , form.id)
                 const res = await UpdateRoutine( form.id , form.name, form.goal, form.isPublic)
                 const myRoutines = await GetRoutinesByUser(GetCurrentUsername());
                 setMyRoutines(myRoutines)

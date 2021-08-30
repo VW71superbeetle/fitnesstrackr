@@ -22,37 +22,15 @@ body {
 
 .app {
 	display: grid;
-	
 	grid-template-rows: auto auto 1fr;
 	grid-gap: 8px;
-
 	height: 100%;
-
-
-	/* background-image: linear-gradient(45deg, #874da2 0%, #c43a30 100%); */
 }
 
 header {
     display: grid;
     grid-template-columns: 320px 1fr;
 }
-/* header {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-
-	font-family: 'Balsamic Sans', sans-serif;
-	font-size: 16px;
-    
-	padding: 1em;
-} */
-
-/* #NavBar {
-    display: flex;
-	flex-direction: row;
-    justify-content: space-evenly;
-} */
 
 #NavBar {
     display: grid;
@@ -65,11 +43,16 @@ header {
     justify-content: space-between;
     width: 90%
 }
-.RoutineCard, .ActivityCard, #CreateRoutineForm, #CreateActivityForm{
+.RoutineCard, .ActivityCard, #CreateRoutineForm, #CreateActivityForm, .CreateRoutine{
     max-width: 80%;
     margin-left: 10%;
 }
 
 .loginForm {
     max-width: 300px;
+}
+
+input { 
+    margin-top: '3px';
+    padding: '3px' 
 }

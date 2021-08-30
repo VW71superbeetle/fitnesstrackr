@@ -33,7 +33,6 @@ const CreateActivity = ({ setActivities }) => {
             <form onSubmit={handleCreateSubmit}>
 				<label>Name:</label>
 				<input
-					style={{ marginTop: '3px', padding: '3px' }}
 					required
 					name="name"
 					value={form.name}
@@ -42,7 +41,6 @@ const CreateActivity = ({ setActivities }) => {
 				<br></br>
 				<label>Description:</label>
 				<input
-					style={{ marginTop: '3px', padding: '3px' }}
 					required
 					name="description"
 					value={form.description}

@@ -53,7 +53,7 @@ export async function healthCheck() {
         const { data } =  await axios.get(URL);
         return data;
     } catch (error) {
-        throw error
+        console.error(error)
     }
 };
 
@@ -67,9 +67,9 @@ export async function registerNewUser( username, password) {
             password
         })
         storeCurrentUser(data)
-        return data.user
+        return data
     } catch (error) {
-        
+        console.error(error)
     }
 };
 
@@ -83,7 +83,7 @@ export async function loginExistingUser(username, password) {
         storeCurrentUser(data)
         return data
     } catch (error) {
-        
+        console.error(error)
     }
 };
 
@@ -91,10 +91,9 @@ export async function GetLoggedInUser() {
     const URL = `${apiURL}/users/me`
     try {
         const {data} =  await axios.get(`${URL}`)
-        console.log(data)
         return data
     } catch (error) {
-        
+        console.error(error)
     }
 }
 
@@ -104,10 +103,9 @@ export async function GetAllActivities() {
     const URL = `${apiURL}/activities`
     try {
         const {data} =  await axios.get(`${URL}`)
-        // console.log(data)
         return data;
     } catch (error) {
-        
+        console.error(error)
     }
 }
 
@@ -122,10 +120,9 @@ export async function CreateNewActivity(name, description) {
                 headers: { Authorization: 'Bearer ' + getCurrentToken() }
             }
         )
-        console.log("NewActivity===>>>",data)
         return data
     } catch (error) {
-        
+        console.error(error)
     }
 };
 
@@ -136,10 +133,9 @@ export async function UpdateActivity(activityID, name, description) {
             name:name,
             description:description
         })
-        console.log(data)
         return data
     } catch (error) {
-        
+        console.error(error)
     }
 };
 
@@ -149,26 +145,23 @@ export async function GetAllRoutines() {
     const URL = `${apiURL}/routines`
     try {
         const {data} = await axios.get(`${URL}`)
-        // console.log(data)
         return data;
     } catch (error) {
-        
+        console.error(error)
     }
 }
 
 export async function GetRoutinesByUser(userName) {
     const URL = `${apiURL}/users/${userName}/routines`
-    console.log("URL:", URL)
     try {
         const {data} = await axios.get(`${URL}`,
             {
                 headers: { Authorization: 'Bearer ' + getCurrentToken() }
             }
         )
-        await console.log("RoutinesByUser",userName,"DATA:>>>",data)
         return data
     } catch (error) {
-        
+        console.error(error)
     }
 }
 
@@ -176,16 +169,14 @@ export async function GetRoutinesByActivity(ActivityID) {
     const URL = `${apiURL}/activities/${ActivityID}/routines`
     try {
         const {data} = await axios.get(`${URL}`)
-        console.log(data)
         return data
     } catch (error) {
-        
+        console.error(error)
     }
 }
 
 export async function CreateNewRoutine(name, goal, isPublic) {
     const URL = `${apiURL}/routines`
-    console.log("Headers:", getHeaders())
     try {
         const {data} = await axios.post(`${URL}`, {
             name:name,
@@ -214,7 +205,7 @@ export async function UpdateRoutine(id, name, goal, isPublic) {
         })
         return data
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 };
 
@@ -227,7 +218,7 @@ export async function DeleteRoutine(routineID) {
             })
         return data
     } catch (error) {
-        
+        console.error(error)
     }
 };
 
@@ -239,10 +230,9 @@ export async function CreateNewRoutineActivity(routineID, count, duration) {
             count:count,
             duration:duration
         })
-        console.log(data)
         return data
     } catch (error) {
-        
+        console.error(error)
     }
 };
 
@@ -255,7 +245,6 @@ export async function UpdateRoutineActivity(routineActivityID, count, duration) 
         }, {
             headers: { Authorization: 'Bearer ' + getCurrentToken() }
         })
-        console.log(data)
         return data
     } catch (error) {
         
@@ -272,9 +261,8 @@ export async function DeleteRoutineActivity(routineActivityID) {
                 headers: { Authorization: 'Bearer ' + getCurrentToken() }
             }
         )
-        console.log(data)
         return data
     } catch (error) {
-        
+        console.error(error)
     }
 };

@@ -8,7 +8,6 @@ const MyRoutines = ({myroutines, setMyRoutines}) => {
 
     const handleDeleteSubmit = async ({id}) => {
         try {   
-                console.log(" handleDeleteSubmit called")
                 const res = await DeleteRoutine(id)
                 const myRoutines = await GetRoutinesByUser(GetCurrentUsername());
                 setMyRoutines(myRoutines)
@@ -18,24 +17,11 @@ const MyRoutines = ({myroutines, setMyRoutines}) => {
         }
     }
     
-    const handleEditSubmit = async ({id, name, goal, isPublic}) => {
-        try {   
-                console.log(" handleEditSubmit called")
-                return (
-                    <EditRoutine setMyRoutines={setMyRoutines} id={id} setMyRoutines={setMyRoutines} name={name} goal={goal} isPublic = {isPublic}/>
-                )
-        } catch (error) {
-            console.error(error)
-            alert('Error Creating Routine', error)
-        }
-    }
-
-    
-
     return (
         <>
             <div className = "Routines">
-                <h1>My Routines</h1>                
+                <h1>My Routines</h1>    
+                <CreateRoutine myroutines={myroutines}  setMyRoutines={setMyRoutines} />            
                 {myroutines.map(({id, creatorId ,creatorName, goal, isPublic=true ,name, activities }) => (
                     <div className="RoutineCard card" key={id}> 
                         <h3>Routine: {name}</h3>
@@ -72,7 +58,7 @@ const MyRoutines = ({myroutines, setMyRoutines}) => {
                     </div>
                 ))}           
             </div>   
-            <CreateRoutine myroutines={myroutines} setMyRoutines={setMyRoutines}/>
+
         </>
         )
 
